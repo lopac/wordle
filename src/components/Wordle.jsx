@@ -49,7 +49,7 @@ function Wordle() {
     rows.push(<Row key={`row-${i}`} value={value} />);
   }
 
-  return <div className="p-8 mt-36">{rows}</div>;
+  return <div className="p-8 mt-6 md:mt-36">{rows}</div>;
 }
 
 export default Wordle;

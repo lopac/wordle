@@ -4,12 +4,20 @@ import { ThemeContext } from '../contexts/ThemeContext';
 function ThemeModeBtn() {
   const { isDarkMode, setMode } = React.useContext(ThemeContext);
 
+  const onClick = () => {
+    window.focus();
+    setMode();
+  };
+
   return (
-    <button type="button" className="btn dark:text-white text-black text-center" onClick={setMode}>
+    <button
+      type="button"
+      className="btn dark:text-white text-black text-center touch-none"
+      onClick={onClick}>
       {!isDarkMode && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-6 w-6 transform transition duration-300 hover:scale-125"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -25,7 +33,7 @@ function ThemeModeBtn() {
       {isDarkMode && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-6 w-6 transform transition duration-300 hover:scale-125"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

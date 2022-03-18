@@ -7,5 +7,21 @@
 }
 
 .cell.inactive {
-  @apply dark:border-stone-700 border-slate-400;
+  @apply dark:border-stone-700 border-stone-300;
+}
+
+.cell.match {
+  @apply bg-green-500 border-green-500;
+}
+
+.cell.contains {
+  @apply bg-amber-500 border-amber-500;
+}
+
+.cell.miss {
+  @apply bg-stone-700 border-stone-700;
+}
+
+.abs-center {
+  @apply ml-auto mr-auto left-0 right-0;
 }

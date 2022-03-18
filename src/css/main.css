@@ -1,3 +1,11 @@
 .btn {
   @apply font-bold py-2 px-4 rounded;
 }
+
+.cell.active {
+  @apply dark:border-white border-black;
+}
+
+.cell.inactive {
+  @apply dark:border-stone-700 border-slate-400;
+}

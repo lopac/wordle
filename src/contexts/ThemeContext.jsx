@@ -1,10 +1,10 @@
 import React, { createContext, useState } from 'react';
 
-const ThemeContext = createContext({ isDarkMode: undefined, setMode: () => {} });
+const ThemeContext = createContext({ isDarkMode: false, setMode: () => {} });
 
 // eslint-disable-next-line react/prop-types
 function ThemeProvider({ children }) {
-  const previous = localStorage.getItem('isDarkMode') ?? false;
+  const previous = localStorage.getItem('isDarkMode') === 'true' ?? false;
 
   const [isDarkMode, setDarkMode] = useState(previous);
 

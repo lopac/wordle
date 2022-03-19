@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import CellState from '../../constants/CellState';
 
-function Cell({ value }) {
+function Cell({ value = null, state }) {
+  const textColorClass =
+    state === CellState.INIT || state === CellState.ACTIVE
+      ? 'dark:text-white text-black'
+      : 'text-white';
+
   return (
-    <div className={value ? 'active' : ''} aria-hidden="true">
+    <div aria-hidden="true">
       <div
-        className={`cell ${
-          value ? 'active' : 'inactive'
-        } flex border-2 dark:border-white border-black h-12 w-12 md:h-16 md:w-16 text-center cursor-default select-none`}>
+        className={`cell ${state} flex border-2 h-12 w-12 md:h-16 md:w-16 text-center cursor-default select-none`}>
         <div className="m-auto">
-          <p className="dark:text-white text-black text-3xl font-bold uppercase">{value ?? ''}</p>
+          <p className={`${textColorClass} text-3xl font-bold uppercase`}>{value ?? ''}</p>
         </div>
       </div>
     </div>
@@ -18,6 +22,7 @@ function Cell({ value }) {
 
 Cell.propTypes = {
   value: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
 };
 
 export default Cell;

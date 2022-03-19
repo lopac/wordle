@@ -1,34 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Cell from './Cell';
+import { getCellState } from './gridHelpers';
 
 function Row({ value, wordToGuess, isSubmitted }) {
   const cells = [];
 
-  function getBgClass(i) {
-    const isMatch = wordToGuess[i] === value[i];
-    const contains = wordToGuess.includes(value[i]);
-
-    if (!isSubmitted) {
-      return null;
-    }
-
-    if (isMatch) {
-      return 'match';
-    }
-
-    if (contains) {
-      return 'contains';
-    }
-
-    return 'miss';
-  }
-
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5; i += 1) {
     const cellValue = value[i] ?? '';
 
-    cells.push(<Cell key={`cell-${i}`} value={cellValue} bgClass={getBgClass(i)} />);
+    cells.push(
+      <Cell
+        key={`cell-${i}`}
+        value={cellValue}
+        state={getCellState(i, wordToGuess, value, isSubmitted)}
+      />,
+    );
   }
 
   return <div className="flex justify-center gap-2 mb-2">{cells}</div>;

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import WORDS from '../constants/wordList';
 import Alert from './Alert';
 import Row from './grid/Row';
+import Keyboard from './keyboard/Keyboard';
 
 const wordToGuess = WORDS[random.int(0, 5757)];
 
@@ -103,6 +104,9 @@ function Wordle() {
         </Alert>
       )}
       <div className="p-8 mt-6 md:mt-24">{rows}</div>
+      <div className="sticky top-[75vh]">
+        <Keyboard />
+      </div>
     </>
   );
 }

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { keyboardColorsMapState } from '../../atoms';
 
 const bcksp = (
   <svg
@@ -18,6 +20,10 @@ const bcksp = (
 );
 
 function Button({ letter, isSpecial = false }) {
+  const colorMap = useRecoilValue(keyboardColorsMapState);
+
+  const state = colorMap[letter];
+
   let width = 'max-w-[43px]';
 
   if (isSpecial) {
@@ -31,15 +37,15 @@ function Button({ letter, isSpecial = false }) {
     window.dispatchEvent(event);
   };
 
-  const eletter = letter === 'backspace' ? bcksp : letter;
+  const letterDom = letter === 'backspace' ? bcksp : letter;
 
   return (
     <div
       aria-hidden
       onClick={onKeyDown}
-      className={`flex bg-gray-400 rounded text-center w-full ${width} h-14 m-1 select-none`}>
+      className={`flex key ${state} bg-gray-400 rounded text-center w-full ${width} h-14 m-1 select-none`}>
       <div className="m-auto">
-        <p className="text-xs font-bold text-black dark:text-white uppercase">{eletter}</p>
+        <p className="text-xs font-bold text-black dark:text-white uppercase">{letterDom}</p>
       </div>
     </div>
   );

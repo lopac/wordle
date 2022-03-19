@@ -52,6 +52,7 @@ function Wordle() {
     } else if (currentRow >= 5) {
       showAlert(`${wordToGuess}`);
     }
+
     setCurrentRow(currentRow + 1);
 
     setHistory([...history, guess]);

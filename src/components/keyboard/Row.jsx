@@ -6,7 +6,7 @@ function Row({ letters, hasSpecialKeys = false, isMiddle = false }) {
   const keys = [];
 
   if (isMiddle) {
-    keys.push(<div className="max-w-[21px] w-full" />);
+    keys.push(<div key="spacer-start" className="max-w-[21px] w-full" />);
   }
 
   if (hasSpecialKeys) {
@@ -22,7 +22,7 @@ function Row({ letters, hasSpecialKeys = false, isMiddle = false }) {
   }
 
   if (isMiddle) {
-    keys.push(<div className="max-w-[21px] w-full" />);
+    keys.push(<div key="spacer-end" className="max-w-[21px] w-full" />);
   }
 
   return <div className="flex">{keys}</div>;

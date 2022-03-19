@@ -4,9 +4,9 @@ import Row from './Row';
 function Keyboard() {
   return (
     <div className="m-auto max-w-md">
-      <Row letters="QWERTYUIOP" />
-      <Row letters="ASDFGHJKL" isMiddle />
-      <Row letters="ZXCVBNM" hasSpecialKeys />
+      <Row letters="qwertyuiop" />
+      <Row letters="asdfghjkl" isMiddle />
+      <Row letters="zxcvbnm" hasSpecialKeys />
     </div>
   );
 }

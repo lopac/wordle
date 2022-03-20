@@ -4,35 +4,57 @@ import { useSetRecoilState } from 'recoil';
 import { keyboardColorsMapState } from '../../atoms';
 import CellState from '../../constants/CellState';
 import Cell from './Cell';
-import { getCellState } from './gridHelpers';
 
 function Row({ value, wordToGuess, isSubmitted }) {
   const setKeyboardColorsMap = useSetRecoilState(keyboardColorsMapState);
+
+  const getCellState = (index, letter) => {
+    const isMatch = wordToGuess[index] === letter;
+
+    const contains = !isMatch && wordToGuess.includes(letter);
+
+    if (!isSubmitted) {
+      if (!letter) return CellState.INIT;
+      return CellState.ACTIVE;
+    }
+
+    if (isMatch) {
+      return CellState.MATCH;
+    }
+
+    if (contains) {
+      return CellState.CONTAINS;
+    }
+
+    return CellState.MISS;
+  };
+
+  const getKeyState = (index, letter, prevState) => {
+    const newState = getCellState(index, letter);
+
+    if (
+      !prevState ||
+      prevState === CellState.ACTIVE ||
+      (prevState === CellState.CONTAINS && newState === CellState.MATCH)
+    ) {
+      return newState;
+    }
+
+    return prevState;
+  };
 
   const cells = [];
 
   for (let i = 0; i < 5; i += 1) {
     const letter = value[i] ?? '';
 
-    const cellState = getCellState(i, wordToGuess, value, isSubmitted);
+    const cellState = getCellState(i, letter);
 
     if (letter !== '') {
-      setKeyboardColorsMap((prev) => {
-        let val = null;
-
-        if (!prev[letter] || prev[letter] === CellState.ACTIVE) {
-          val = cellState;
-        }
-        // color already defined
-        else {
-          val = prev[letter];
-        }
-
-        return {
-          ...prev,
-          [letter]: val,
-        };
-      });
+      setKeyboardColorsMap((prev) => ({
+        ...prev,
+        [letter]: getKeyState(i, letter, prev[letter]),
+      }));
     }
 
     cells.push(<Cell key={`cell-${i}`} value={letter} state={cellState} />);

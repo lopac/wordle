@@ -1,6 +1,6 @@
 import random from 'random';
 import React, { useEffect, useState } from 'react';
-import WORDS from '../constants/wordList';
+import { DICTIONARY, WORDS } from '../constants/wordList';
 import Alert from './Alert';
 import Row from './grid/Row';
 import Keyboard from './keyboard/Keyboard';
@@ -39,7 +39,7 @@ function Wordle() {
       return;
     }
 
-    const isInDictionary = WORDS.includes(guess);
+    const isInDictionary = DICTIONARY.includes(guess);
 
     if (!isInDictionary) {
       showAlert('Not in word list');

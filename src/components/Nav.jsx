@@ -6,7 +6,7 @@ function Nav() {
     <>
       <div className="grid grid-cols-3 gap-0">
         <div />
-        <p className="text-center font-nova tracking-widest text-3xl dark:text-white">Wordle</p>
+        <p className="text-center font-nova tracking-widest text-3xl dark:text-white">LeWord</p>
         <div className="text-right">
           <ThemeModeBtn />
         </div>

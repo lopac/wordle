@@ -1,13 +1,12 @@
-# wordle
+# LeWord
 
-Wordle clone developed using React
+Wordle clone developed using React and Recoil
 
 # TODO
 
 - [X] Wordlist
-- [ ] Keyboard
-- [ ] Cell animations
+- [X] Keyboard
 - [ ] Playing instructions
+- [ ] Cell animations
 - [ ] Info
-- [ ] History using localStorage
-- [ ] Share
+- [ ] Sharing of result

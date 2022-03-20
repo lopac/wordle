@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { keyboardColorsMapState } from '../../atoms';
+import CellState from '../../constants/CellState';
 
 const bcksp = (
   <svg
@@ -22,7 +23,10 @@ const bcksp = (
 function Button({ letter, isSpecial = false }) {
   const colorMap = useRecoilValue(keyboardColorsMapState);
 
-  const state = colorMap[letter];
+  const bgClass = colorMap[letter];
+
+  const textColorClass =
+    !bgClass || bgClass === CellState.ACTIVE ? 'text-black dark:text-white' : 'text-white';
 
   let width = 'max-w-[43px]';
 
@@ -43,9 +47,9 @@ function Button({ letter, isSpecial = false }) {
     <div
       aria-hidden
       onClick={onKeyDown}
-      className={`flex key ${state} bg-gray-400 rounded text-center w-full ${width} h-14 m-1 select-none`}>
+      className={`flex key ${bgClass} bg-gray-400 rounded text-center w-full ${width} h-14 m-1 select-none`}>
       <div className="m-auto">
-        <p className="text-xs font-bold text-black dark:text-white uppercase">{letterDom}</p>
+        <p className={`text-xs font-bold ${textColorClass} uppercase`}>{letterDom}</p>
       </div>
     </div>
   );

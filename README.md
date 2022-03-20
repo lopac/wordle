@@ -4,9 +4,10 @@ Wordle clone developed using React
 
 # TODO
 
-- [ ] Wordlist
-- [ ] Cell animations
+- [X] Wordlist
 - [ ] Keyboard
-- [ ] History using localStorage
-- [ ] Footer
+- [ ] Cell animations
 - [ ] Playing instructions
+- [ ] Info
+- [ ] History using localStorage
+- [ ] Share

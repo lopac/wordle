@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react';
 import WORDS from '../constants/wordList';
 import Alert from './Alert';
 import Row from './grid/Row';
+import Keyboard from './keyboard/Keyboard';
 
 const wordToGuess = WORDS[random.int(0, 5757)];
 
 // eslint-disable-next-line no-console
 console.log(wordToGuess);
+
+const matchMessages = ['Genius', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'];
 
 function Wordle() {
   const rows = [];
@@ -40,22 +43,23 @@ function Wordle() {
 
     if (!isInDictionary) {
       showAlert('Not in word list');
-    } else {
-      if (wordToGuess === guess) {
-        showAlert(`Genius`);
-        setHasMatched(true);
-      }
-
-      setCurrentRow(currentRow + 1);
-
-      setHistory([...history, guess]);
-      setGuess('');
+      return;
     }
 
-    if (currentRow >= 5 && !hasMatched) showAlert(`${wordToGuess}`);
+    if (wordToGuess === guess) {
+      showAlert(matchMessages[currentRow]);
+      setHasMatched(true);
+    } else if (currentRow >= 5) {
+      showAlert(`${wordToGuess}`);
+    }
+
+    setCurrentRow(currentRow + 1);
+
+    setHistory([...history, guess]);
+    setGuess('');
   };
 
-  function handleKey(key) {
+  const handleKey = (key) => {
     if (hasMatched) {
       return;
     }
@@ -73,15 +77,15 @@ function Wordle() {
       setShowAlert(false);
       setGuess(guess + keyNormalized);
     }
-  }
+  };
 
-  function handleKeyDown(e) {
+  const handleKeyDown = (e) => {
     if (e.ctrlKey || e.metaKey || e.altKey) {
       return;
     }
 
     handleKey(e.key);
-  }
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -89,7 +93,7 @@ function Wordle() {
   });
 
   for (let i = 0; i < 6; i += 1) {
-    const value = i === currentRow ? guess : history[i] ?? '';
+    const value = currentRow === i ? guess : history[i] ?? '';
     rows.push(
       <Row key={`row-${i}`} value={value} wordToGuess={wordToGuess} isSubmitted={currentRow > i} />,
     );
@@ -103,6 +107,9 @@ function Wordle() {
         </Alert>
       )}
       <div className="p-8 mt-6 md:mt-24">{rows}</div>
+      <div className="sticky top-[65vh]">
+        <Keyboard />
+      </div>
     </>
   );
 }

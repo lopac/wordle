@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className={isDarkMode ? 'dark' : ''}>
-      <div className="px-8 pt-6 bg-white dark:bg-slate-900 h-screen">
+      <div className="px-1 pt-6 bg-white dark:bg-slate-900 h-screen">
         <Nav />
         <Wordle />
       </div>

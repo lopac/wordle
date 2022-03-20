@@ -2,23 +2,28 @@
   @apply font-bold py-2 px-4 rounded;
 }
 
-.cell.active {
+.cell.active,
+.key.active {
   @apply dark:border-white border-black;
 }
 
-.cell.inactive {
+.cell.inactive,
+.key.inactive {
   @apply dark:border-stone-700 border-stone-300;
 }
 
-.cell.match {
+.cell.match,
+.key.match {
   @apply bg-green-500 border-green-500;
 }
 
-.cell.contains {
+.cell.contains,
+.key.contains {
   @apply bg-amber-500 border-amber-500;
 }
 
-.cell.miss {
+.cell.miss,
+.key.miss {
   @apply bg-stone-700 border-stone-700;
 }
 

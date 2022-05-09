@@ -37,8 +37,10 @@ jobs:
           command: >-
             CI_PROJECT_DIR=$CIRCLE_WORKING_DIRECTORY
             API_TOKEN=$AZ_SWA_API_TOKEN
+            APP_ARTIFACT_LOCATION="$CI_PROJECT_DIR/dist"
             APP_PATH="$CI_PROJECT_DIR"
             OUTPUT_PATH="$CI_PROJECT_DIR/dist"
+            bash /entrypoint.sh
             echo 'App deployed successfully'
 
 workflows:

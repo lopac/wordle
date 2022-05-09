@@ -43,10 +43,12 @@ jobs:
 
 workflows:
   version: 2
-  jobs:
-    - test
-    - build-and-deploy:
-        requires:
-          - test
-        branches:
-          only: master
+  main:
+    jobs:
+      - test
+      - build-and-deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

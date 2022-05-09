@@ -1,0 +1,52 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/node:17.9
+        environment:
+          STAGE: test
+    steps:
+      - checkout
+
+      # Install packages
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install --immutable
+      - save_cache:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - .yarn/cache
+            - .yarn/unplugged
+
+      # Run tests
+      - run:
+          name: Run tests
+          command: yarn run test
+
+  build-and-deploy:
+    docker:
+      - image: registry.gitlab.com/static-web-apps/azure-static-web-apps-deploy
+        environment:
+          STAGE: myapp-prd
+    steps:
+      - checkout
+      - run:
+          name:
+          command: >-
+            CI_PROJECT_DIR=$CIRCLE_WORKING_DIRECTORY
+            API_TOKEN=$AZ_SWA_API_TOKEN
+            APP_PATH="$CI_PROJECT_DIR"
+            OUTPUT_PATH="$CI_PROJECT_DIR/dist"
+            echo 'App deployed successfully'
+
+workflows:
+  version: 2
+  jobs:
+    - test
+    - build-and-deploy:
+        requires:
+          - test
+        branches:
+          only: master

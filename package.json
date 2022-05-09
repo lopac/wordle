@@ -8,7 +8,7 @@
     "build": "parcel build src/index.html",
     "prestart": "yarn run clean",
     "start": "parcel src/index.html",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },

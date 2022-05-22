@@ -52,5 +52,7 @@ workflows:
           requires:
             - test
           filters:
+            tags:
+              ignore: /.*/
             branches:
               only: main

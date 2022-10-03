@@ -33,7 +33,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name:
+          name: Build and deploy
           command: >-
             CI_PROJECT_DIR=$CIRCLE_WORKING_DIRECTORY
             API_TOKEN=$AZ_SWA_API_TOKEN
